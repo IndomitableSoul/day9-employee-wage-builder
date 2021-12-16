@@ -9,18 +9,19 @@ public class EmployeeWageBuilder {
 	private static final int MAX_HRS_IN_MONTH = 10;
 	
 	public static int computeEmpWage() {
-		//variables
-				int totalEmpHrs = 0, totalEmpWage = 0;
-				int totalWorkingDays = 0;
+		  //variables
+		  int totalEmpHrs = 0, totalEmpWage = 0;
+		  int totalWorkingDays = 0;
 				
-				//Computation
-				while (totalEmpHrs<=MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+		  //Computation
+		  while (totalEmpHrs<=MAX_HRS_IN_MONTH && 
+				  totalWorkingDays < NUM_OF_WORKING_DAYS) {
 					
-					int empHrs = 0;
-					totalWorkingDays++;
+		     int empHrs = 0;
+		     totalWorkingDays++;
 					
-					int empCheck = (int)Math.floor(Math.random()*10)%3;
-					switch(empCheck) {
+		     int empCheck = (int)Math.floor(Math.random()*10)%3;
+		     switch(empCheck) {
 					case IS_FULL_TIME:
 						empHrs = 8;
 						break;
@@ -31,17 +32,15 @@ public class EmployeeWageBuilder {
 						empHrs = 0;
 					}
 					
-					totalEmpHrs += empHrs;
-		     		int empWage = empHrs * EMP_RATE_PER_HOUR;
-		     		totalEmpWage += empWage;
-
-					
-				}
+		     totalEmpHrs += empHrs;
+		     int empWage = empHrs * EMP_RATE_PER_HOUR;
+		     totalEmpWage += empWage;		
+		}
 				
-				System.out.println("Total Emp Wage "+totalEmpWage);
+		 System.out.println("Total Emp Wage "+totalEmpWage);
 				return totalEmpWage;
-	}
-	public static void main(String[] args) {
+	 }
+	 public static void main(String[] args) {
 		computeEmpWage();
 	}
 	
