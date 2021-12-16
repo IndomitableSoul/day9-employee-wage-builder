@@ -4,30 +4,35 @@ public class EmployeeWageBuilder {
 	//constants
 	public static final int IS_PART_TIME = 1;
 	public static final int IS_FULL_TIME = 2;
-	
-	private String company;
-	private int empRatePerHour;
-	private int numOfWorkingDays;
-	private int maxHrsPerMonth;
+	public CompanyEmpWage[] companyWageArray  ;
+	private int numberOfCompany = 0;
 	
 	
-	
-	public EmployeeWageBuilder(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth) {
+	public EmployeeWageBuilder() {
 		super();
-		this.company = company;
-		this.empRatePerHour = empRatePerHour;
-		this.numOfWorkingDays = numOfWorkingDays;
-		this.maxHrsPerMonth = maxHrsPerMonth;
+		companyWageArray = new CompanyEmpWage[5];
 	}
-	public int computeEmpWage() {
+
+	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth) {
+		 companyWageArray[numberOfCompany] = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHrsPerMonth);
+		 numberOfCompany++;
+	}
+	
+	private void computeEmpWage() {
+		for(int i=0; i<numberOfCompany; i++) {
+
+			companyWageArray[i].setTotalEmpWage(this.computeEmpWage(companyWageArray[i]));
+			System.out.println(companyWageArray[i]);
+		}
+	}
+	private int computeEmpWage(CompanyEmpWage companyEmpWage) {
 		  //variables
 		  int totalEmpHrs = 0, totalEmpWage = 0;
 		  int totalWorkingDays = 0;
 				
 		  //Computation
-		  while (totalEmpHrs<=maxHrsPerMonth && 
-				  totalWorkingDays < numOfWorkingDays) {
-					
+		  while (totalEmpHrs<=companyEmpWage.maxHrsPerMonth && 
+				  totalWorkingDays < companyEmpWage.numOfWorkingDays) {
 		     int empHrs = 0;
 		     totalWorkingDays++;
 					
@@ -44,21 +49,19 @@ public class EmployeeWageBuilder {
 					}
 					
 		     totalEmpHrs += empHrs;
-		     int empWage = empHrs * empRatePerHour;
+		     int empWage = empHrs * companyEmpWage.empRatePerHour;
 		     totalEmpWage += empWage;		
 		}
 		 return totalEmpWage;
 	 }
 	 public static void main(String[] args) {
-			/* UC-9
-			 * Ability to save the Total Wage for Each Company - 
-			 * Note: You can Create EmpWageBuilder for each Company
-			 * Use Instance Variable instead of function parameters
-			 */
-		EmployeeWageBuilder dMart = new EmployeeWageBuilder("DMart", 20, 2, 10);
-		System.out.println("Total Emp Wage for Company "+dMart.company+" is "+dMart.computeEmpWage());
-		EmployeeWageBuilder bigBasket = new EmployeeWageBuilder("BigBasket", 10, 2, 10);
-		System.out.println("Total Emp Wage for Company "+bigBasket.company+" is "+bigBasket.computeEmpWage());
+			
+		EmployeeWageBuilder employeeWageBuilder = new EmployeeWageBuilder();
+		employeeWageBuilder.addCompanyEmpWage("DMart", 20, 2, 10);
+		employeeWageBuilder.addCompanyEmpWage("Reliance", 25, 20, 10);
+		employeeWageBuilder.computeEmpWage();
+	
+		
 		
 	}
 	
