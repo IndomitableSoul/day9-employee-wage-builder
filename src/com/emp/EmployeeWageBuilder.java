@@ -1,29 +1,31 @@
 package com.emp;
 
+import java.util.ArrayList;
+
 public class EmployeeWageBuilder implements EmpWageBuilderInterface{
-	//constants
 	
-	public CompanyEmpWage[] companyWageArray  ;
+	public ArrayList<CompanyEmpWage> companyWageArrayList ;
 	private int numberOfCompany = 0;
 	
 	
 	public EmployeeWageBuilder() {
 		super();
-		companyWageArray = new CompanyEmpWage[5];
+		companyWageArrayList = new ArrayList<>();
 	}
 
 	@Override
 	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth) {
-		 companyWageArray[numberOfCompany] = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHrsPerMonth);
-		 numberOfCompany++;
+		companyWageArrayList.add(new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHrsPerMonth)) ;
+		numberOfCompany++;
 	}
 	
 
 	public void computeEmpWage() {
 		for(int i=0; i<numberOfCompany; i++) {
 
-			companyWageArray[i].setTotalEmpWage(this.computeEmpWage(companyWageArray[i]));
-			System.out.println(companyWageArray[i]);
+			companyWageArrayList.get(i).setTotalEmpWage(this.computeEmpWage(companyWageArrayList.get(i)));
+			System.out.println(companyWageArrayList.get(i));
+			
 		}
 	}
 	
