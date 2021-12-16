@@ -1,9 +1,8 @@
 package com.emp;
 
-public class EmployeeWageBuilder {
+public class EmployeeWageBuilder implements EmpWageBuilderInterface{
 	//constants
-	public static final int IS_PART_TIME = 1;
-	public static final int IS_FULL_TIME = 2;
+	
 	public CompanyEmpWage[] companyWageArray  ;
 	private int numberOfCompany = 0;
 	
@@ -13,19 +12,23 @@ public class EmployeeWageBuilder {
 		companyWageArray = new CompanyEmpWage[5];
 	}
 
+	@Override
 	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHrsPerMonth) {
 		 companyWageArray[numberOfCompany] = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHrsPerMonth);
 		 numberOfCompany++;
 	}
 	
-	private void computeEmpWage() {
+
+	public void computeEmpWage() {
 		for(int i=0; i<numberOfCompany; i++) {
 
 			companyWageArray[i].setTotalEmpWage(this.computeEmpWage(companyWageArray[i]));
 			System.out.println(companyWageArray[i]);
 		}
 	}
-	private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+	
+
+	public int computeEmpWage(CompanyEmpWage companyEmpWage) {
 		  //variables
 		  int totalEmpHrs = 0, totalEmpWage = 0;
 		  int totalWorkingDays = 0;
@@ -54,6 +57,7 @@ public class EmployeeWageBuilder {
 		}
 		 return totalEmpWage;
 	 }
+	 
 	 public static void main(String[] args) {
 			
 		EmployeeWageBuilder employeeWageBuilder = new EmployeeWageBuilder();
