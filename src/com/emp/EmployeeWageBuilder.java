@@ -1,6 +1,8 @@
 package com.emp;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
 
 public class EmployeeWageBuilder implements EmpWageBuilderInterface{
 	
@@ -60,6 +62,18 @@ public class EmployeeWageBuilder implements EmpWageBuilderInterface{
 		}
 		 return totalEmpWage;
 	 }
+	public void getTotalWage(String companyName) {
+		Iterator<CompanyEmpWage> iter = companyWageArrayList.iterator();
+		
+		
+		while(iter.hasNext()) {
+			CompanyEmpWage company = iter.next();
+			if(companyName.equalsIgnoreCase(company.company))
+				System.out.println(company);
+		}
+		
+		
+	}
 	 
 	 public static void main(String[] args) {
 			
@@ -67,6 +81,10 @@ public class EmployeeWageBuilder implements EmpWageBuilderInterface{
 		employeeWageBuilder.addCompanyEmpWage("DMart", 20, 2, 10);
 		employeeWageBuilder.addCompanyEmpWage("Reliance", 25, 20, 10);
 		employeeWageBuilder.computeEmpWage();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Which company's total wage do you want Dmart or Reliance");
+		String companyName = sc.next();
+		employeeWageBuilder.getTotalWage(companyName);
 	
 		
 		
