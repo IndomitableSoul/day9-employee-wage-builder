@@ -34,11 +34,12 @@ public class EmployeeWageBuilder implements EmpWageBuilderInterface{
 		  //variables
 		  int totalEmpHrs = 0, totalEmpWage = 0;
 		  int totalWorkingDays = 0;
-				
+		  	
 		  //Computation
 		  while (totalEmpHrs<=companyEmpWage.maxHrsPerMonth && 
 				  totalWorkingDays < companyEmpWage.numOfWorkingDays) {
 		     int empHrs = 0;
+		     int dailyWage=0;
 		     totalWorkingDays++;
 					
 		     int empCheck = (int)Math.floor(Math.random()*10)%3;
